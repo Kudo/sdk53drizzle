@@ -1,15 +1,10 @@
-import { Text, View } from "react-native";
+import * as schema from '@/db/schema';
+import { drizzle } from 'drizzle-orm/expo-sqlite';
+import { useSQLiteContext } from 'expo-sqlite';
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+  const db = useSQLiteContext();
+  const drizzleDb = drizzle(db, { schema });
+
+  // more code
 }
