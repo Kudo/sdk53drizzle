@@ -1,7 +1,4 @@
-import * as schema from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/expo-sqlite';
-import { useSQLiteContext } from 'expo-sqlite';
 import { useCallback, useEffect, useState } from 'react';
 import {
   Alert,
@@ -13,9 +10,11 @@ import {
   View,
 } from 'react-native';
 
+import * as schema from '@/db/schema';
+import { useDrizzle } from '@/hooks/useDrizzle';
+
 export default function Index() {
-  const db = useSQLiteContext();
-  const drizzleDb = drizzle(db, { schema });
+  const drizzleDb = useDrizzle();
 
   const [lists, setLists] = useState<(typeof schema.lists.$inferSelect)[]>([]);
   const [tasks, setTasks] = useState<schema.Task[]>([]);
